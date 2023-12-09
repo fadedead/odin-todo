@@ -1,7 +1,9 @@
 import './styles.css';
 import getHeader from './header';
-import getSidebar from './sidebar';
+import { getSidebar } from './sidebar';
 import getCategoryDialog from './categoryDialog';
+import { getTodoList, getTodoListButton } from './todoList';
+
 
 function genratePage() {
     const content = document.getElementById('content');
@@ -14,6 +16,12 @@ function genratePage() {
     // Add the sidebar and category dialog
     container.appendChild(getSidebar());
     container.appendChild(getCategoryDialog());
+
+    // Get todo list
+    getTodoList('ALL');
+
+    // Add the plus button
+    container.appendChild(getTodoListButton());
 
     // Add the container to content
     content.append(container);

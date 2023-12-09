@@ -1,6 +1,7 @@
 import './styles.css';
+import Cross from './components/sidebar/cross.svg';
 
-export default function getSidebar() {
+function getSidebar() {
     // Create the Sidebar
     const sidebar = document.createElement('div');
     sidebar.classList.add('sidebar');
@@ -21,16 +22,40 @@ export default function getSidebar() {
     const addType = document.createElement('div');
     addType.innerHTML = 'Add category';
     addType.classList.add('sub-type');
+    addType.classList.add('type-add-category');
     addType.addEventListener('click', addSidebarCategory);
     sidebar.appendChild(addType);
+
+    addCategoryFromLocalStrorage(sidebar);
 
     return sidebar;
 }
 
-function addSidebarCategory(e) {
-    const dialog = document.getElementById('category-dialog');
-    dialog.showModal();
-
-    
+function addSidebarCategory() {
+    document.getElementById('category-dialog').showModal();
 }
 
+function addCategoryFromLocalStrorage(sidebar) {
+    if (localStorage.categories != null) {
+        const categories = JSON.parse(localStorage.getItem('categories'));
+        for (let [categoryName, categoryValues] of Object.entries(categories)) {
+            const category = document.createElement('div');
+            category.innerHTML = categoryName;
+            category.classList.add('sub-type');
+            sidebar.insertBefore(category, sidebar.lastChild);
+        }
+    }
+}
+
+function addNewCategory(data) {
+    const sidebar = document.getElementsByClassName('sidebar')[0];
+    const category = document.createElement('div');
+    category.innerHTML = data.category;
+    category.classList.add('sub-type');
+    sidebar.insertBefore(category, sidebar.lastChild);
+}
+
+export {
+    getSidebar,
+    addNewCategory
+}

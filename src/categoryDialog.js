@@ -1,4 +1,5 @@
-import { addCategory } from './localstorage';
+import { storeCategory } from './localstorage';
+import { addNewCategory } from './sidebar';
 import './styles.css';
 
 export default function getCategoryDialog() {
@@ -41,7 +42,8 @@ export default function getCategoryDialog() {
             formDataObject[key] = value;
         });
 
-        addCategory(formDataObject);
+        storeCategory(formDataObject);
+        addNewCategory(formDataObject);
 
         e.preventDefault();
         dialog.close();

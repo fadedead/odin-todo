@@ -1,5 +1,4 @@
-function addCategory(data) {
-    console.log(data);
+function storeCategory(data) {
     let categories = localStorage.getItem('categories');
     if (categories != null) {
         let json = JSON.parse(categories);
@@ -12,6 +11,17 @@ function addCategory(data) {
     }
 }
 
-module.exports = {
-    addCategory
+function getCategory() {
+    let categories = localStorage.getItem('categories');
+    if (categories != null) {
+        let json = JSON.parse(categories);
+        return json;
+    } else {
+        return {};
+    }
+}
+
+export {
+    storeCategory,
+    getCategory
 }
