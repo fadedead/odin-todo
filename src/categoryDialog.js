@@ -41,11 +41,17 @@ export default function getCategoryDialog() {
         formData.forEach((value, key) => {
             formDataObject[key] = value;
         });
+        if(formDataObject.category.includes('_')) {
+            alert('Underscore(_) are not allowed in category names');
+            return;
+        }
 
-        storeCategory(formDataObject);
         addNewCategory(formDataObject);
+        formDataObject.category = formDataObject.category.replace(' ', '_');
+        storeCategory(formDataObject);
 
         e.preventDefault();
+        form.reset();
         dialog.close();
     });
     buttonContainer.appendChild(submit);
@@ -54,7 +60,10 @@ export default function getCategoryDialog() {
     close.classList.add('form-button');
     close.setAttribute('type', 'button');
     close.innerHTML = 'cancel';
-    close.addEventListener('click', () => { dialog.close(); });
+    close.addEventListener('click', () => { 
+        dialog.close(); 
+        form.reset();
+    });
     buttonContainer.appendChild(close);
 
     // Add the containers to form

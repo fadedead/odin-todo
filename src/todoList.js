@@ -1,12 +1,13 @@
 import './styles.css';
-import { getCategory } from './localstorage';
+import { getAllCategory } from './localstorage';
 import Plus from './components/todolist/circle-plus.svg';
+import getTodoDialog from './todoDialog';
 
 function getTodoList(section) {
     const todoList = document.createElement('div');
     todoList.classList.add('todo-list');
 
-    const categories = getCategory();
+    const categories = getAllCategory();
     if('ALL' == section) {
         console.log();
     }
@@ -31,6 +32,7 @@ function getTodoListButton() {
     let button = new Image();
     button.classList.add('add-button');
     button.src = Plus;
+    button.addEventListener('click', () => {document.getElementById('todo-dialog').showModal();})
     return button;
 }
 

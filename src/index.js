@@ -3,6 +3,7 @@ import getHeader from './header';
 import { getSidebar } from './sidebar';
 import getCategoryDialog from './categoryDialog';
 import { getTodoList, getTodoListButton } from './todoList';
+import getTodoDialog from './todoDialog';
 
 
 function genratePage() {
@@ -19,6 +20,7 @@ function genratePage() {
 
     // Get todo list
     getTodoList('ALL');
+    container.appendChild(getTodoDialog());
 
     // Add the plus button
     container.appendChild(getTodoListButton());

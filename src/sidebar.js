@@ -1,5 +1,6 @@
 import './styles.css';
 import Cross from './components/sidebar/cross.svg';
+import { deleteCategoryFromLocalStorage, getAvailableCategories } from './localstorage';
 
 function getSidebar() {
     // Create the Sidebar
@@ -36,23 +37,52 @@ function addSidebarCategory() {
 }
 
 function addCategoryFromLocalStrorage(sidebar) {
-    if (localStorage.categories != null) {
-        const categories = JSON.parse(localStorage.getItem('categories'));
-        for (let [categoryName, categoryValues] of Object.entries(categories)) {
-            const category = document.createElement('div');
-            category.innerHTML = categoryName;
-            category.classList.add('sub-type');
-            sidebar.insertBefore(category, sidebar.lastChild);
-        }
+    const categories = getAvailableCategories();
+    for (let categoryName of categories) {
+        const category = document.createElement('div');
+        category.innerHTML = categoryName.replace('_', ' ');
+        category.classList.add('sub-type');
+
+        addCrossImage(category, categoryName);
+
+        sidebar.insertBefore(category, sidebar.lastChild);
     }
 }
 
+
 function addNewCategory(data) {
+    console.log(data);
     const sidebar = document.getElementsByClassName('sidebar')[0];
     const category = document.createElement('div');
     category.innerHTML = data.category;
     category.classList.add('sub-type');
+
+    addCrossImage(category, data.category.replace(' ', '_'));
+
     sidebar.insertBefore(category, sidebar.lastChild);
+}
+
+function addCrossImage(category, categoryName) {
+    const cross = new Image();
+    cross.classList.add(`delete-category:${categoryName}`);
+    cross.src = Cross;
+    cross.addEventListener('click', deleteCategory);
+    category.append(cross);
+}
+
+function deleteCategory(e) {
+    let categoryClass = e.target.className;
+    const category = categoryClass.split(':').pop();
+    
+    const sidebar = document.getElementsByClassName('sidebar')[0];
+    
+    for (let child of sidebar.childNodes) {
+        if (child.firstChild.textContent == category.replace('_', ' ')) {
+            sidebar.removeChild(child);
+            deleteCategoryFromLocalStorage(category);
+            break;
+        }
+    }
 }
 
 export {
