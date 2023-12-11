@@ -39,6 +39,7 @@ function addSidebarCategory() {
 function addCategoryFromLocalStrorage(sidebar) {
     const categories = getAvailableCategories();
     for (let categoryName of categories) {
+        if(categoryName == 'ALL_NOTES') continue;
         const category = document.createElement('div');
         category.innerHTML = categoryName.replace('_', ' ');
         category.classList.add('sub-type');

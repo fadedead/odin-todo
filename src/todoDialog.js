@@ -1,4 +1,4 @@
-import { getAvailableCategories, storeCategory } from './localstorage';
+import { getAvailableCategories, storeCategory, storeTodo } from './localstorage';
 import './styles.css';
 
 export default function getTodoDialog() {
@@ -110,7 +110,8 @@ export default function getTodoDialog() {
             formDataObject[key] = value;
         });
         
-        console.log(formDataObject);
+        //TODO: Add to storage
+        storeTodo(formDataObject);
 
         e.preventDefault();
         dialog.close();

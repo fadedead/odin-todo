@@ -1,14 +1,13 @@
+function createAllCategory() {
+    const json = { 'ALL_NOTES': [] };
+    localStorage.setItem('categories', JSON.stringify(json));
+}
+
 function storeCategory(data) {
-    let categories = localStorage.getItem('categories');
-    if (categories != null) {
-        let json = JSON.parse(categories);
-        json[data.category] = [];
-        localStorage.setItem('categories', JSON.stringify(json));
-    } else {
-        let json = {};
-        json[data.category] = [];
-        localStorage.setItem('categories', JSON.stringify(json));
-    }
+    const categories = localStorage.getItem('categories');
+    const json = JSON.parse(categories);
+    json[data.category] = [];
+    localStorage.setItem('categories', JSON.stringify(json));
 }
 
 function deleteCategoryFromLocalStorage(categoryName) {
@@ -36,9 +35,17 @@ function getAvailableCategories() {
     return categoryNames;
 }
 
+function storeTodo(todoObject) {
+    const categories = JSON.parse(localStorage.getItem('categories'));
+    categories[todoObject.category].push(todoObject);
+    localStorage.setItem('categories', JSON.stringify(categories));
+}
+
 export {
+    createAllCategory,
     storeCategory,
     deleteCategoryFromLocalStorage,
     getAllCategory,
-    getAvailableCategories
+    getAvailableCategories,
+    storeTodo
 }
