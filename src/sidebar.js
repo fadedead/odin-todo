@@ -1,5 +1,5 @@
 import './styles.css';
-import Cross from './components/sidebar/cross.svg';
+import Cross from './components/cross.svg';
 import { deleteCategoryFromLocalStorage, getAvailableCategories } from './localstorage';
 
 function getSidebar() {
@@ -52,7 +52,6 @@ function addCategoryFromLocalStrorage(sidebar) {
 
 
 function addNewCategory(data) {
-    console.log(data);
     const sidebar = document.getElementsByClassName('sidebar')[0];
     const category = document.createElement('div');
     category.innerHTML = data.category;

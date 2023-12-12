@@ -1,6 +1,7 @@
 import './styles.css';
 import { getAllCategory } from './localstorage';
 import Plus from './components/todolist/circle-plus.svg';
+import Cross from './components/cross.svg';
 
 function getTodoList(section) {
     const todoList = document.createElement('div');
@@ -45,7 +46,6 @@ function getTodosForCatrgoty(todos) {
         currTodo.classList.add('each-todo');
         
         const currTodoTitle = document.createElement('div');
-        console.log(todo);
         currTodoTitle.innerHTML = todo.todoTitle; 
 
         const currInfoContainer = document.createElement('div');
@@ -71,6 +71,8 @@ function getTodosForCatrgoty(todos) {
         dueDate.innerHTML = todo['due-date'];
         currInfoContainer.appendChild(dueDate);
 
+        addCrossImage(currInfoContainer, currTodo);
+
         currTodo.appendChild(currTodoTitle);
         currTodo.appendChild(currInfoContainer);
 
@@ -86,6 +88,14 @@ function getTodoListButton() {
     button.src = Plus;
     button.addEventListener('click', () => { document.getElementById('todo-dialog').showModal(); })
     return button;
+}
+
+function addCrossImage(containerDiv, todoDiv) {
+    const cross = new Image();
+    cross.classList.add(`delete-todo-button`);
+    cross.src = Cross;
+    cross.addEventListener('click', () => {todoDiv.parentNode.removeChild(todoDiv)});
+    containerDiv.append(cross);
 }
 
 export {

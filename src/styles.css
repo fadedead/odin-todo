@@ -112,6 +112,8 @@ img[class^="delete-category"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    border-radius: .6rem;
 }
 
 .each-todo-subinfo {
@@ -128,6 +130,10 @@ img[class^="delete-category"] {
 }
 .todo-priority-p2 {
     background-color: red;
+}
+
+.delete-todo-button {
+    height: 1.2rem;
 }
 
 .todo-note {
