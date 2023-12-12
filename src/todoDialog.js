@@ -1,4 +1,4 @@
-import { getAvailableCategories, storeCategory, storeTodo } from './localstorage';
+import { getAvailableCategories, storeTodo } from './localstorage';
 import './styles.css';
 
 export default function getTodoDialog() {

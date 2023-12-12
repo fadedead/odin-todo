@@ -112,14 +112,22 @@ img[class^="delete-category"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    background-color: beige;
 }
 
 .each-todo-subinfo {
     display: flex;
     gap: 1rem;
     align-items: center;
+}
+
+.todo-priority-p0 {
+    background-color: #e3e3e3;
+}
+.todo-priority-p1 {
+    background-color: yellow;
+}
+.todo-priority-p2 {
+    background-color: red;
 }
 
 .todo-note {
