@@ -54,6 +54,7 @@ export default function getCategoryDialog() {
 
         e.preventDefault();
         form.reset();
+        location.reload();
         dialog.close();
     });
     buttonContainer.appendChild(submit);

@@ -134,6 +134,7 @@ export default function getTodoDialog() {
         
         e.preventDefault();
         dialog.close();
+        location.reload();
     });
     buttonContainer.appendChild(submit);
 

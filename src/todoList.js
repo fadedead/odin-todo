@@ -1,5 +1,5 @@
 import './styles.css';
-import { getAllCategory } from './localstorage';
+import { deleteTodoFromLocalStorage, getAllCategory } from './localstorage';
 import Plus from './components/todolist/circle-plus.svg';
 import Cross from './components/cross.svg';
 
@@ -10,10 +10,13 @@ function getTodoList(section) {
     const categories = getAllCategory();
     if ('ALL' == section) {
         for (let [category, todos] of Object.entries(categories)) {
+            if(todos.length < 1) continue;
+
             const categoryContainer = document.createElement('div');
             categoryContainer.classList.add('each-category');
 
             const categoryTitle = document.createElement('p');
+            categoryTitle.classList.add('category-title');
             categoryTitle.innerHTML = category.replace('_', ' ')+':';
             categoryContainer.appendChild(categoryTitle);
 
@@ -71,7 +74,7 @@ function getTodosForCatrgoty(todos) {
         dueDate.innerHTML = todo['due-date'];
         currInfoContainer.appendChild(dueDate);
 
-        addCrossImage(currInfoContainer, currTodo);
+        addCrossImage(currInfoContainer, currTodo, todo);
 
         currTodo.appendChild(currTodoTitle);
         currTodo.appendChild(currInfoContainer);
@@ -90,11 +93,15 @@ function getTodoListButton() {
     return button;
 }
 
-function addCrossImage(containerDiv, todoDiv) {
+function addCrossImage(containerDiv, todoDiv, todo) {
     const cross = new Image();
     cross.classList.add(`delete-todo-button`);
     cross.src = Cross;
-    cross.addEventListener('click', () => {todoDiv.parentNode.removeChild(todoDiv)});
+    cross.addEventListener('click', () => {
+        todoDiv.parentNode.removeChild(todoDiv);
+        deleteTodoFromLocalStorage(todo.category, todo.todoTitle, todo.priority, todo['due-date']);
+        location.reload();
+    });
     containerDiv.append(cross);
 }
 

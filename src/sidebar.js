@@ -83,6 +83,7 @@ function deleteCategory(e) {
             break;
         }
     }
+    location.reload();
 }
 
 export {

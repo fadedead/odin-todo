@@ -43,11 +43,22 @@ function storeTodo(todoObject) {
     localStorage.setItem('categories', JSON.stringify(categories));
 }
 
+function deleteTodoFromLocalStorage(category, title, priority, date) {
+    const categories = JSON.parse(localStorage.getItem('categories'));
+    for(let [index, todo] of categories[category].entries()) {
+        if(todo.category == category && todo.todoTitle == title && todo.priority == priority && todo['due-date'] == date) {
+            categories[category].splice(index, 1);
+        }   
+    }
+    localStorage.setItem('categories', JSON.stringify(categories));
+}
+
 export {
     createAllCategory,
     storeCategory,
     deleteCategoryFromLocalStorage,
     getAllCategory,
     getAvailableCategories,
-    storeTodo
+    storeTodo,
+    deleteTodoFromLocalStorage
 }

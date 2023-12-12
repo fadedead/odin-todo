@@ -99,10 +99,16 @@ img[class^="delete-category"] {
     padding: .2rem;
 }
 
+.category-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
 .each-category {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    padding: 1rem;
 }
 
 .each-todo {
