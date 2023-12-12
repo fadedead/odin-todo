@@ -1,6 +1,7 @@
 import './styles.css';
 import Cross from './components/cross.svg';
 import { deleteCategoryFromLocalStorage, getAvailableCategories } from './localstorage';
+import { getTodoList } from './todoList';
 
 function getSidebar() {
     // Create the Sidebar
@@ -11,13 +12,13 @@ function getSidebar() {
     const allNotes = document.createElement('div');
     allNotes.innerHTML = 'All Notes';
     allNotes.classList.add('sub-type');
+    allNotes.addEventListener('click', () => {
+        const container = document.getElementsByClassName('container')[0];
+        const todoList = document.getElementsByClassName('todo-list')[0];
+        container.removeChild(todoList)
+        container.appendChild(getTodoList('ALL'));
+    });
     sidebar.appendChild(allNotes);
-
-    // Deleted notes
-    const binedNotes = document.createElement('div');
-    binedNotes.innerHTML = 'Bin';
-    binedNotes.classList.add('sub-type');
-    sidebar.appendChild(binedNotes);
 
     // Add a category
     const addType = document.createElement('div');
@@ -44,12 +45,18 @@ function addCategoryFromLocalStrorage(sidebar) {
         category.innerHTML = categoryName.replace('_', ' ');
         category.classList.add('sub-type');
 
+        category.addEventListener('click', () => {
+            const container = document.getElementsByClassName('container')[0];
+            const todoList = document.getElementsByClassName('todo-list')[0];
+            container.removeChild(todoList);
+            container.appendChild(getTodoList(categoryName));
+        });
+
         addCrossImage(category, categoryName);
 
         sidebar.insertBefore(category, sidebar.lastChild);
     }
 }
-
 
 function addNewCategory(data) {
     const sidebar = document.getElementsByClassName('sidebar')[0];
@@ -68,6 +75,14 @@ function addCrossImage(category, categoryName) {
     cross.src = Cross;
     cross.addEventListener('click', deleteCategory);
     category.append(cross);
+}
+
+function loadCategoryTodos(element) {
+    console.log(element);
+    // const container = document.getElementsByClassName('container')[0];
+    // const todoList = document.getElementsByClassName('todo-list')[0];
+    // container.removeChild(todoList)
+    // container.appendChild(getTodoList());
 }
 
 function deleteCategory(e) {

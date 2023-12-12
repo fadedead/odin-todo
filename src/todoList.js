@@ -10,33 +10,60 @@ function getTodoList(section) {
     const categories = getAllCategory();
     if ('ALL' == section) {
         for (let [category, todos] of Object.entries(categories)) {
-            if(todos.length < 1) continue;
+            if (todos.length < 1) continue;
 
             const categoryContainer = document.createElement('div');
             categoryContainer.classList.add('each-category');
 
             const categoryTitle = document.createElement('p');
             categoryTitle.classList.add('category-title');
-            categoryTitle.innerHTML = category.replace('_', ' ')+':';
+            categoryTitle.innerHTML = category.replace('_', ' ') + ':';
             categoryContainer.appendChild(categoryTitle);
 
             const unsortedTodo = getTodosForCatrgoty(todos);
-            unsortedTodo.sort((a,b) => {
-                if(a[0][1] != b[0][1]) {
-                    return b[0][1]-a[0][1]
+            unsortedTodo.sort((a, b) => {
+                if (a[0][1] != b[0][1]) {
+                    return b[0][1] - a[0][1]
                 } else {
                     const aDate = new Date(a[1]);
                     const bDate = new Date(b[1]);
-                    return aDate-bDate;
+                    return aDate - bDate;
                 }
             });
 
-            for(let todo of unsortedTodo) {
+            for (let todo of unsortedTodo) {
                 categoryContainer.appendChild(todo[2]);
             }
-            
+
             todoList.appendChild(categoryContainer);
         }
+    } else {
+        if (categories[section].length < 1) alert('No todos in that category');
+
+        const categoryContainer = document.createElement('div');
+        categoryContainer.classList.add('each-category');
+
+        const categoryTitle = document.createElement('p');
+        categoryTitle.classList.add('category-title');
+        categoryTitle.innerHTML = section.replace('_', ' ') + ':';
+        categoryContainer.appendChild(categoryTitle);
+
+        const unsortedTodo = getTodosForCatrgoty(categories[section]);
+        unsortedTodo.sort((a, b) => {
+            if (a[0][1] != b[0][1]) {
+                return b[0][1] - a[0][1]
+            } else {
+                const aDate = new Date(a[1]);
+                const bDate = new Date(b[1]);
+                return aDate - bDate;
+            }
+        });
+
+        for (let todo of unsortedTodo) {
+            categoryContainer.appendChild(todo[2]);
+        }
+
+        todoList.appendChild(categoryContainer);
     }
 
     return todoList;
@@ -47,9 +74,9 @@ function getTodosForCatrgoty(todos) {
     for (let todo of todos) {
         const currTodo = document.createElement('div');
         currTodo.classList.add('each-todo');
-        
+
         const currTodoTitle = document.createElement('div');
-        currTodoTitle.innerHTML = todo.todoTitle; 
+        currTodoTitle.innerHTML = todo.todoTitle;
 
         const currInfoContainer = document.createElement('div');
         currInfoContainer.classList.add('each-todo-subinfo');
@@ -58,15 +85,15 @@ function getTodosForCatrgoty(todos) {
         prio.innerHTML = todo.priority;
         currInfoContainer.append(prio);
 
-        switch(todo.priority) {
-            case 'p0': 
-                currTodo.classList.add('todo-priority-p0'); 
+        switch (todo.priority) {
+            case 'p0':
+                currTodo.classList.add('todo-priority-p0');
                 break;
-            case 'p1': 
-                currTodo.classList.add('todo-priority-p1'); 
+            case 'p1':
+                currTodo.classList.add('todo-priority-p1');
                 break;
-            case 'p2': 
-                currTodo.classList.add('todo-priority-p2'); 
+            case 'p2':
+                currTodo.classList.add('todo-priority-p2');
                 break;
         }
 
