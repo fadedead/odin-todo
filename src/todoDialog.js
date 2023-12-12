@@ -10,7 +10,7 @@ export default function getTodoDialog() {
     const form = document.createElement('form');
     form.id = 'todo-form';
 
-    
+
     // Add due date
     const dateContainer = document.createElement('div');
     dateContainer.classList.add('form-input-container');
@@ -24,7 +24,7 @@ export default function getTodoDialog() {
     dateInput.setAttribute('type', 'date');
     dateInput.setAttribute('name', 'due-date');
     dateInput.setAttribute('id', 'due-date');
-    dateInput.setAttribute('required', true);
+    dateInput.setAttribute('required', '');
     dateContainer.appendChild(dateInput);
 
     form.appendChild(dateContainer);
@@ -42,8 +42,8 @@ export default function getTodoDialog() {
     categoryInput.setAttribute('form', 'todo-form');
     categoryInput.setAttribute('name', 'category');
     categoryInput.setAttribute('id', 'category');
-    categoryInput.setAttribute('required', true);
-    
+    categoryInput.setAttribute('required', '');
+
     // seclections for categories
     const categories = getAvailableCategories();
     categories.forEach(function (optionText, index) {
@@ -67,11 +67,10 @@ export default function getTodoDialog() {
 
     const priorityInput = document.createElement('select');
     priorityInput.setAttribute('form', 'todo-form');
-    priorityInput.setAttribute('type', 'select');
     priorityInput.setAttribute('name', 'priority');
     priorityInput.setAttribute('id', 'priority');
-    priorityInput.setAttribute('required', true);
-    
+    priorityInput.setAttribute('required', '');
+
     // seclections for priority 
     const options = ["p2", "p1", "p0"];
     options.forEach(function (optionText, index) {
@@ -83,6 +82,24 @@ export default function getTodoDialog() {
 
     priorityContainer.appendChild(priorityInput);
     form.appendChild(priorityContainer);
+
+    // Add the todo title
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('form-input-container');
+
+    const todoTitleLabel = document.createElement('label');
+    todoTitleLabel.innerHTML = 'Todo:';
+    todoTitleLabel.setAttribute('for', 'todoTitle');
+    titleContainer.appendChild(todoTitleLabel);
+
+    const todoTitleInput = document.createElement('input');
+    todoTitleInput.setAttribute('form', 'todo-form');
+    todoTitleInput.setAttribute('name', 'todoTitle');
+    todoTitleInput.setAttribute('id', 'todoTitle');
+    todoTitleInput.setAttribute('required', '');
+    titleContainer.appendChild(todoTitleInput);
+
+    form.append(titleContainer)
 
     // Add note 
     const todoNote = document.createElement('textarea');
@@ -96,12 +113,14 @@ export default function getTodoDialog() {
     // Add the buttons to form
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('form-button-container');
-
+    
     const submit = document.createElement('button');
     submit.classList.add('form-button');
     submit.setAttribute('type', 'submit');
     submit.innerText = 'confirm';
     submit.addEventListener('click', (e) => {
+        if(!form.checkValidity()) return;
+
         // Process form
         const formElement = document.getElementById('todo-form');
         const formData = new FormData(formElement);
@@ -112,7 +131,7 @@ export default function getTodoDialog() {
         
         //TODO: Add to storage
         storeTodo(formDataObject);
-
+        
         e.preventDefault();
         dialog.close();
     });

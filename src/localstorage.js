@@ -1,6 +1,8 @@
 function createAllCategory() {
-    const json = { 'ALL_NOTES': [] };
-    localStorage.setItem('categories', JSON.stringify(json));
+    if(localStorage.getItem('categories') == null) {
+        const json = { 'ALL_NOTES': [] };
+        localStorage.setItem('categories', JSON.stringify(json));
+    }
 }
 
 function storeCategory(data) {

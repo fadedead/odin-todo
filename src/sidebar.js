@@ -39,7 +39,7 @@ function addSidebarCategory() {
 function addCategoryFromLocalStrorage(sidebar) {
     const categories = getAvailableCategories();
     for (let categoryName of categories) {
-        if(categoryName == 'ALL_NOTES') continue;
+        if (categoryName == 'ALL_NOTES') continue;
         const category = document.createElement('div');
         category.innerHTML = categoryName.replace('_', ' ');
         category.classList.add('sub-type');
@@ -74,9 +74,9 @@ function addCrossImage(category, categoryName) {
 function deleteCategory(e) {
     let categoryClass = e.target.className;
     const category = categoryClass.split(':').pop();
-    
+
     const sidebar = document.getElementsByClassName('sidebar')[0];
-    
+
     for (let child of sidebar.childNodes) {
         if (child.firstChild.textContent == category.replace('_', ' ')) {
             sidebar.removeChild(child);

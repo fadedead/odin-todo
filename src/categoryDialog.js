@@ -23,7 +23,7 @@ export default function getCategoryDialog() {
     const input = document.createElement('input');
     input.setAttribute('name', 'category');
     input.setAttribute('id', 'category-name');
-    input.setAttribute('required', true);
+    input.setAttribute('required', '');
     inputContainer.appendChild(input);
 
     // Add the buttons to form
@@ -34,6 +34,8 @@ export default function getCategoryDialog() {
     submit.classList.add('form-button');
     submit.innerText = 'confirm';
     submit.addEventListener('click', (e) => {
+        if(!form.checkValidity()) return;
+        
         // Process form
         const formElement = document.getElementById('category-form');
         const formData = new FormData(formElement);

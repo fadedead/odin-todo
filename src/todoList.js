@@ -8,24 +8,43 @@ function getTodoList(section) {
 
     const categories = getAllCategory();
     if ('ALL' == section) {
-        for (let [category, values] of Object.entries(categories)) {
+        for (let [category, todos] of Object.entries(categories)) {
             const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('each-category');
 
-            const category = document.createElement('p');
-            category.innerHTML = category;
-            categoryContainer.appendChild(category);
+            const categoryTitle = document.createElement('p');
+            categoryTitle.innerHTML = category.replace('_', ' ')+':';
+            categoryContainer.appendChild(categoryTitle);
 
-            for (let val of values) {
+            for (let todo of todos) {
+                const currTodo = document.createElement('div');
+                currTodo.classList.add('each-todo');
+                
+                const currTodoTitle = document.createElement('div');
+                console.log(todo);
+                currTodoTitle.innerHTML = todo.todoTitle; 
+
+                const currInfoContainer = document.createElement('div');
+                currInfoContainer.classList.add('each-todo-subinfo');
+
+                const prio = document.createElement('div');
+                prio.innerHTML = todo.priority;
+                currInfoContainer.append(prio);
+
+                const dueDate = document.createElement('div');
+                dueDate.innerHTML = todo['due-date'];
+                currInfoContainer.appendChild(dueDate);
+
+                currTodo.appendChild(currTodoTitle);
+                currTodo.appendChild(currInfoContainer);
+
+                categoryContainer.appendChild(currTodo);
             }
+            todoList.appendChild(categoryContainer);
         }
     }
 
     return todoList;
-}
-
-// Add a todo
-function addTodo(category, todo) {
-
 }
 
 // Todo list add button

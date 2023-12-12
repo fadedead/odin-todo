@@ -43,6 +43,7 @@
 .container {
     /* height: 95vh; */
     /* width: 100vw; */
+    display: flex;
 }
 
 #category-dialog, #todo-dialog {
@@ -94,7 +95,31 @@ img[class^="delete-category"] {
 }
 
 .todo-list {
+    width: 100%;
+    padding: .2rem;
+}
 
+.each-category {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.each-todo {
+    height: 5vh;
+
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: beige;
+}
+
+.each-todo-subinfo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .todo-note {
