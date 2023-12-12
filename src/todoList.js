@@ -106,6 +106,12 @@ function getTodosForCatrgoty(todos) {
         currTodo.appendChild(currTodoTitle);
         currTodo.appendChild(currInfoContainer);
 
+        console.log(todo.todo);
+        const note = document.createElement('div');
+        note.classList.add('curr-note-hidden');
+        note.innerHTML = todo.todo;
+        currTodo.appendChild(note);
+
         unsortedTodo.push([todo.priority, todo['due-date'], currTodo]);
     }
     return unsortedTodo;

@@ -118,6 +118,7 @@ img[class^="delete-category"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     border-radius: .6rem;
 }
@@ -145,6 +146,21 @@ img[class^="delete-category"] {
 .todo-note {
     height: 30vh;
     width: 40vw;
+}
+
+.curr-note-hidden {
+    display: none;
+    position: absolute;
+
+    height: 20vh;
+    width: 10vw;
+
+    border: 2px solid green;
+    background-color: #333;
+}
+
+.each-todo:hover .curr-note-hidden {
+    display: block;
 }
 
 .add-button {
