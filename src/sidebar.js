@@ -2,6 +2,7 @@ import './styles.css';
 import Cross from './components/cross.svg';
 import { deleteCategoryFromLocalStorage, getAvailableCategories } from './localstorage';
 import { getTodoList } from './todoList';
+import getCategoryDialog from './categoryDialog';
 
 function getSidebar() {
     // Create the Sidebar
@@ -34,7 +35,9 @@ function getSidebar() {
 }
 
 function addSidebarCategory() {
-    document.getElementById('category-dialog').showModal();
+    const dialog = getCategoryDialog();
+    document.body.appendChild(dialog);
+    dialog.showModal();
 }
 
 function addCategoryFromLocalStrorage(sidebar) {
@@ -75,14 +78,6 @@ function addCrossImage(category, categoryName) {
     cross.src = Cross;
     cross.addEventListener('click', deleteCategory);
     category.append(cross);
-}
-
-function loadCategoryTodos(element) {
-    console.log(element);
-    // const container = document.getElementsByClassName('container')[0];
-    // const todoList = document.getElementsByClassName('todo-list')[0];
-    // container.removeChild(todoList)
-    // container.appendChild(getTodoList());
 }
 
 function deleteCategory(e) {

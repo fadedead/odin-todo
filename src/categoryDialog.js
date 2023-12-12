@@ -54,8 +54,8 @@ export default function getCategoryDialog() {
 
         e.preventDefault();
         form.reset();
-        location.reload();
         dialog.close();
+        document.body.removeChild(dialog);
     });
     buttonContainer.appendChild(submit);
 
@@ -66,6 +66,7 @@ export default function getCategoryDialog() {
     close.addEventListener('click', () => { 
         dialog.close(); 
         form.reset();
+        document.body.removeChild(dialog);
     });
     buttonContainer.appendChild(close);
 

@@ -4,7 +4,7 @@ import { getSidebar } from './sidebar';
 import getCategoryDialog from './categoryDialog';
 import { getTodoList, getTodoListButton } from './todoList';
 import getTodoDialog from './todoDialog';
-import { createAllCategory } from './localstorage';
+import { createAllCategory, getAvailableCategories } from './localstorage';
 
 
 function genratePage() {
@@ -18,11 +18,9 @@ function genratePage() {
     // Add the sidebar and category dialog
     createAllCategory();
     container.appendChild(getSidebar());
-    container.appendChild(getCategoryDialog());
 
     // Get todo list
     container.appendChild(getTodoList('ALL'));
-    container.appendChild(getTodoDialog());
 
     // Add the plus button
     container.appendChild(getTodoListButton());

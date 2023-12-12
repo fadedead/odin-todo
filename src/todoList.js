@@ -1,7 +1,8 @@
 import './styles.css';
-import { deleteTodoFromLocalStorage, getAllCategory } from './localstorage';
+import { deleteTodoFromLocalStorage, getAllCategory, getAvailableCategories } from './localstorage';
 import Plus from './components/todolist/circle-plus.svg';
 import Cross from './components/cross.svg';
+import getTodoDialog from './todoDialog';
 
 function getTodoList(section) {
     const todoList = document.createElement('div');
@@ -122,7 +123,11 @@ function getTodoListButton() {
     let button = new Image();
     button.classList.add('add-button');
     button.src = Plus;
-    button.addEventListener('click', () => { document.getElementById('todo-dialog').showModal(); })
+    button.addEventListener('click', () => {
+        const avaiableCategories = getAvailableCategories();
+        document.body.appendChild(getTodoDialog(avaiableCategories));
+        document.getElementById('todo-dialog').showModal();
+    });
     return button;
 }
 

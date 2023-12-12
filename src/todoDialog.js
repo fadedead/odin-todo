@@ -1,7 +1,7 @@
-import { getAvailableCategories, storeTodo } from './localstorage';
+import { storeTodo } from './localstorage';
 import './styles.css';
 
-export default function getTodoDialog() {
+export default function getTodoDialog(categoriesStored) {
     // Create a dialog
     const dialog = document.createElement('dialog');
     dialog.id = 'todo-dialog';
@@ -45,7 +45,7 @@ export default function getTodoDialog() {
     categoryInput.setAttribute('required', '');
 
     // seclections for categories
-    const categories = getAvailableCategories();
+    const categories = categoriesStored;
     categories.forEach(function (optionText, index) {
         const optionElement = document.createElement("option");
         optionElement.value = optionText;
@@ -134,7 +134,7 @@ export default function getTodoDialog() {
         
         e.preventDefault();
         dialog.close();
-        location.reload();
+        document.body.removeChild(dialog);
     });
     buttonContainer.appendChild(submit);
 
@@ -142,7 +142,10 @@ export default function getTodoDialog() {
     close.classList.add('form-button');
     close.setAttribute('type', 'button');
     close.innerHTML = 'cancel';
-    close.addEventListener('click', () => { dialog.close(); });
+    close.addEventListener('click', () => { 
+        dialog.close(); 
+        document.body.removeChild(dialog);
+    });
     buttonContainer.appendChild(close);
 
     // Add the containers to form
