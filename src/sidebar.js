@@ -49,10 +49,15 @@ function addCategoryFromLocalStrorage(sidebar) {
         category.classList.add('sub-type');
 
         category.addEventListener('click', () => {
+            const todos = getTodoList(categoryName);
+            if (!todos) {
+                alert('No todos in that category');
+                return;
+            }
             const container = document.getElementsByClassName('container')[0];
             const todoList = document.getElementsByClassName('todo-list')[0];
             container.removeChild(todoList);
-            container.appendChild(getTodoList(categoryName));
+            container.appendChild(todos);
         });
 
         addCrossImage(category, categoryName);
@@ -66,6 +71,18 @@ function addNewCategory(data) {
     const category = document.createElement('div');
     category.innerHTML = data.category;
     category.classList.add('sub-type');
+
+    category.addEventListener('click', () => {
+        const todos = getTodoList(data.category);
+        if (!todos) {
+            alert('No todos in that category');
+            return;
+        }
+        const container = document.getElementsByClassName('container')[0];
+        const todoList = document.getElementsByClassName('todo-list')[0];
+        container.removeChild(todoList);
+        container.appendChild(todos);
+    });
 
     addCrossImage(category, data.category.replace(' ', '_'));
 

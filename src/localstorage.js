@@ -46,7 +46,7 @@ function storeTodo(todoObject) {
 function deleteTodoFromLocalStorage(category, title, priority, date) {
     const categories = JSON.parse(localStorage.getItem('categories'));
     for(let [index, todo] of categories[category].entries()) {
-        if(todo.category == category && todo.todoTitle == title && todo.priority == priority && todo['due-date'] == date) {
+        if(todo.category == category && todo.todoTitle == title && todo.priority == priority && todo.dueDate == date) {
             categories[category].splice(index, 1);
         }   
     }

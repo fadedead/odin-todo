@@ -39,7 +39,7 @@ function getTodoList(section) {
             todoList.appendChild(categoryContainer);
         }
     } else {
-        if (categories[section].length < 1) alert('No todos in that category');
+        if (categories[section].length < 1) return null;
 
         const categoryContainer = document.createElement('div');
         categoryContainer.classList.add('each-category');
@@ -99,7 +99,7 @@ function getTodosForCatrgoty(todos) {
         }
 
         const dueDate = document.createElement('div');
-        dueDate.innerHTML = todo['due-date'];
+        dueDate.innerHTML = todo.dueDate;
         currInfoContainer.appendChild(dueDate);
 
         addCrossImage(currInfoContainer, currTodo, todo);
@@ -113,7 +113,7 @@ function getTodosForCatrgoty(todos) {
         note.innerHTML = todo.todo;
         currTodo.appendChild(note);
 
-        unsortedTodo.push([todo.priority, todo['due-date'], currTodo]);
+        unsortedTodo.push([todo.priority, todo.dueDate, currTodo]);
     }
     return unsortedTodo;
 }
@@ -137,7 +137,7 @@ function addCrossImage(containerDiv, todoDiv, todo) {
     cross.src = Cross;
     cross.addEventListener('click', () => {
         todoDiv.parentNode.removeChild(todoDiv);
-        deleteTodoFromLocalStorage(todo.category, todo.todoTitle, todo.priority, todo['due-date']);
+        deleteTodoFromLocalStorage(todo.category, todo.todoTitle, todo.priority, todo.dueDate);
         location.reload();
     });
     containerDiv.append(cross);

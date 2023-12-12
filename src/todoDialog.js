@@ -1,5 +1,6 @@
 import { storeTodo } from './localstorage';
 import './styles.css';
+import { getTodoList } from './todoList';
 
 export default function getTodoDialog(categoriesStored) {
     // Create a dialog
@@ -17,13 +18,13 @@ export default function getTodoDialog(categoriesStored) {
 
     const dateLabel = document.createElement('label');
     dateLabel.innerHTML = 'Due date:';
-    dateLabel.setAttribute('for', 'due-date');
+    dateLabel.setAttribute('for', 'dueDate');
     dateContainer.appendChild(dateLabel);
 
     const dateInput = document.createElement('input');
     dateInput.setAttribute('type', 'date');
-    dateInput.setAttribute('name', 'due-date');
-    dateInput.setAttribute('id', 'due-date');
+    dateInput.setAttribute('name', 'dueDate');
+    dateInput.setAttribute('id', 'dueDate');
     dateInput.setAttribute('required', '');
     dateContainer.appendChild(dateInput);
 
@@ -104,7 +105,7 @@ export default function getTodoDialog(categoriesStored) {
     // Add note 
     const todoNote = document.createElement('textarea');
     todoNote.classList.add('todo-note');
-    todoNote.setAttribute('name', 'todo');
+    todoNote.setAttribute('name', 'todoNote');
     todoNote.setAttribute('rows', '50');
     todoNote.setAttribute('cols', '80');
     form.appendChild(todoNote);
@@ -113,13 +114,13 @@ export default function getTodoDialog(categoriesStored) {
     // Add the buttons to form
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('form-button-container');
-    
+
     const submit = document.createElement('button');
     submit.classList.add('form-button');
     submit.setAttribute('type', 'submit');
     submit.innerText = 'confirm';
     submit.addEventListener('click', (e) => {
-        if(!form.checkValidity()) return;
+        if (!form.checkValidity()) return;
 
         // Process form
         const formElement = document.getElementById('todo-form');
@@ -128,10 +129,11 @@ export default function getTodoDialog(categoriesStored) {
         formData.forEach((value, key) => {
             formDataObject[key] = value;
         });
-        
+
         //TODO: Add to storage
         storeTodo(formDataObject);
-        
+        loadCurrentTodoCategory(formDataObject.category);
+
         e.preventDefault();
         dialog.close();
         document.body.removeChild(dialog);
@@ -142,8 +144,8 @@ export default function getTodoDialog(categoriesStored) {
     close.classList.add('form-button');
     close.setAttribute('type', 'button');
     close.innerHTML = 'cancel';
-    close.addEventListener('click', () => { 
-        dialog.close(); 
+    close.addEventListener('click', () => {
+        dialog.close();
         document.body.removeChild(dialog);
     });
     buttonContainer.appendChild(close);
@@ -153,4 +155,11 @@ export default function getTodoDialog(categoriesStored) {
 
     dialog.appendChild(form);
     return dialog;
+}
+
+function loadCurrentTodoCategory(category) {
+    const container = document.getElementsByClassName('container')[0];
+    const todoList = document.getElementsByClassName('todo-list')[0];
+    container.removeChild(todoList)
+    container.appendChild(getTodoList(category));
 }
