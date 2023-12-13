@@ -103,16 +103,17 @@ function getTodosForCatrgoty(todos) {
         dueDate.innerHTML = todo.dueDate;
         currInfoContainer.appendChild(dueDate);
 
-        addCrossImage(currInfoContainer, currTodo, todo);
-
+        
         currTodo.appendChild(currTodoTitle);
         currTodo.appendChild(currInfoContainer);
-
+        
         currTodo.addEventListener('click', () => {
             const noteDialog = getNoteDialog(todo);
             document.body.appendChild(noteDialog);
             noteDialog.showModal();
-        })
+        });
+
+        addCrossImage(currInfoContainer, currTodo, todo);
 
         unsortedTodo.push([todo.priority, todo.dueDate, currTodo]);
     }
@@ -136,10 +137,11 @@ function addCrossImage(containerDiv, todoDiv, todo) {
     const cross = new Image();
     cross.classList.add(`delete-todo-button`);
     cross.src = Cross;
-    cross.addEventListener('click', () => {
+
+    cross.addEventListener('click', (e) => {
         todoDiv.parentNode.removeChild(todoDiv);
         deleteTodoFromLocalStorage(todo.category, todo.todoTitle, todo.priority, todo.dueDate);
-        location.reload();
+        e.stopPropagation()
     });
     containerDiv.append(cross);
 }
