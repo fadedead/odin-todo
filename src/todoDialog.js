@@ -130,7 +130,7 @@ export default function getTodoDialog(categoriesStored) {
             formDataObject[key] = value;
         });
 
-        //TODO: Add to storage
+        //Add to storage
         storeTodo(formDataObject);
         loadCurrentTodoCategory(formDataObject.category);
 

@@ -1,6 +1,7 @@
+import { updateTodoNote } from './localstorage';
 import './styles.css';
 
-export default function getNoteDialog() {
+export default function getNoteDialog(todoObj) {
     // Create a dialog
     const dialog = document.createElement('dialog');
     dialog.id = 'note-dialog';
@@ -15,6 +16,7 @@ export default function getNoteDialog() {
     todoNote.setAttribute('name', 'todoNote');
     todoNote.setAttribute('rows', '50');
     todoNote.setAttribute('cols', '80');
+    todoNote.defaultValue = todoObj.todoNote;
     form.appendChild(todoNote);
 
 
@@ -37,9 +39,9 @@ export default function getNoteDialog() {
             formDataObject[key] = value;
         });
 
-        //TODO: Add to storage
-        storeTodo(formDataObject);
-        loadCurrentTodoCategory(formDataObject.category);
+        //Add to storage
+        todoObj.todoNote = formDataObject.todoNote;
+        updateTodoNote(todoObj);
 
         e.preventDefault();
         dialog.close();

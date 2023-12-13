@@ -109,7 +109,7 @@ function getTodosForCatrgoty(todos) {
         currTodo.appendChild(currInfoContainer);
 
         currTodo.addEventListener('click', () => {
-            const noteDialog = getNoteDialog();
+            const noteDialog = getNoteDialog(todo);
             document.body.appendChild(noteDialog);
             noteDialog.showModal();
         })
