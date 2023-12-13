@@ -1,5 +1,5 @@
-import { updateTodoNote } from './localstorage';
 import './styles.css';
+import { updateTodoNote } from './localstorage';
 
 export default function getNoteDialog(todoObj) {
     // Create a dialog

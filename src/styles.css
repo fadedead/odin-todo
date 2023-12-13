@@ -7,8 +7,6 @@
 * {
     margin: 0;
     box-sizing: border-box;
-
-    /* border: 1px solid limegreen; */
 }
 
 #content {
@@ -34,30 +32,36 @@
     width: 4rem;
 
     border-radius: .2rem;
-    box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+    box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
 }
 
 .header {
     height: 5vh;
 
-    padding: 1rem;
+    display: flex;
+    align-items: center;
+    padding-left: .5rem;
     font-size: 1.2rem;
 
     color: whitesmoke;
-    background: var(--header-bg-color); 
+    background: var(--header-bg-color);
 }
 
 .container {
     display: flex;
 }
 
-#category-dialog, #todo-dialog, #note-dialog {
+#category-dialog,
+#todo-dialog,
+#note-dialog {
     margin: auto;
 
     border-radius: .6rem;
 }
 
-#category-form, #todo-form, #note-form {
+#category-form,
+#todo-form,
+#note-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -88,7 +92,7 @@ img[class^="delete-category"] {
 
 .sub-type:hover {
     cursor: pointer;
-    background: gray ;
+    background: gray;
 }
 
 .type-add-category {
@@ -105,7 +109,6 @@ img[class^="delete-category"] {
     width: 85vw;
     padding: .2rem;
 
-    border: 2px solid lawngreen;
     overflow-y: scroll;
 }
 
@@ -142,9 +145,11 @@ img[class^="delete-category"] {
 .todo-priority-p0 {
     background-color: #ffb6b9;
 }
+
 .todo-priority-p1 {
     background-color: #fae3d9;
 }
+
 .todo-priority-p2 {
     background-color: #bbded6;
 }

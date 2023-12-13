@@ -25,7 +25,7 @@ function getTodoList(section) {
             const unsortedTodo = getTodosForCatrgoty(todos);
             unsortedTodo.sort((a, b) => {
                 if (a[0][1] != b[0][1]) {
-                    return b[0][1] - a[0][1]
+                    return a[0][1] - b[0][1]
                 } else {
                     const aDate = new Date(a[1]);
                     const bDate = new Date(b[1]);
@@ -53,7 +53,7 @@ function getTodoList(section) {
         const unsortedTodo = getTodosForCatrgoty(categories[section]);
         unsortedTodo.sort((a, b) => {
             if (a[0][1] != b[0][1]) {
-                return b[0][1] - a[0][1]
+                return a[0][1] - b[0][1];
             } else {
                 const aDate = new Date(a[1]);
                 const bDate = new Date(b[1]);
@@ -103,10 +103,10 @@ function getTodosForCatrgoty(todos) {
         dueDate.innerHTML = todo.dueDate;
         currInfoContainer.appendChild(dueDate);
 
-        
+
         currTodo.appendChild(currTodoTitle);
         currTodo.appendChild(currInfoContainer);
-        
+
         currTodo.addEventListener('click', () => {
             const noteDialog = getNoteDialog(todo);
             document.body.appendChild(noteDialog);

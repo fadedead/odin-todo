@@ -1,5 +1,5 @@
-import { storeTodo } from './localstorage';
 import './styles.css';
+import { storeTodo } from './localstorage';
 import { getTodoList } from './todoList';
 
 export default function getTodoDialog(categoriesStored) {
@@ -160,6 +160,7 @@ export default function getTodoDialog(categoriesStored) {
 function loadCurrentTodoCategory(category) {
     const container = document.getElementsByClassName('container')[0];
     const todoList = document.getElementsByClassName('todo-list')[0];
-    container.removeChild(todoList)
+    if (category == 'ALL_NOTES') category = 'ALL';
+    container.removeChild(todoList);
     container.appendChild(getTodoList(category));
 }

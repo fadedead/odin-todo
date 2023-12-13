@@ -1,11 +1,8 @@
 import './styles.css';
 import getHeader from './header';
 import { getSidebar } from './sidebar';
-import getCategoryDialog from './categoryDialog';
 import { getTodoList, getTodoListButton } from './todoList';
-import getTodoDialog from './todoDialog';
-import { createAllCategory, getAvailableCategories } from './localstorage';
-
+import { createAllCategory } from './localstorage';
 
 function genratePage() {
     const content = document.getElementById('content');

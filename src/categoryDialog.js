@@ -1,6 +1,6 @@
+import './styles.css';
 import { storeCategory } from './localstorage';
 import { addNewCategory } from './sidebar';
-import './styles.css';
 
 export default function getCategoryDialog() {
     // Create a dialog
@@ -34,8 +34,8 @@ export default function getCategoryDialog() {
     submit.classList.add('form-button');
     submit.innerText = 'confirm';
     submit.addEventListener('click', (e) => {
-        if(!form.checkValidity()) return;
-        
+        if (!form.checkValidity()) return;
+
         // Process form
         const formElement = document.getElementById('category-form');
         const formData = new FormData(formElement);
@@ -43,7 +43,7 @@ export default function getCategoryDialog() {
         formData.forEach((value, key) => {
             formDataObject[key] = value;
         });
-        if(formDataObject.category.includes('_')) {
+        if (formDataObject.category.includes('_')) {
             alert('Underscore(_) are not allowed in category names');
             return;
         }
@@ -63,8 +63,8 @@ export default function getCategoryDialog() {
     close.classList.add('form-button');
     close.setAttribute('type', 'button');
     close.innerHTML = 'cancel';
-    close.addEventListener('click', () => { 
-        dialog.close(); 
+    close.addEventListener('click', () => {
+        dialog.close();
         form.reset();
         document.body.removeChild(dialog);
     });
