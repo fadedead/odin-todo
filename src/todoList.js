@@ -3,6 +3,7 @@ import { deleteTodoFromLocalStorage, getAllCategory, getAvailableCategories } fr
 import Plus from './components/todolist/circle-plus.svg';
 import Cross from './components/cross.svg';
 import getTodoDialog from './todoDialog';
+import getNoteDialog from './noteDialog';
 
 function getTodoList(section) {
     const todoList = document.createElement('div');
@@ -107,11 +108,11 @@ function getTodosForCatrgoty(todos) {
         currTodo.appendChild(currTodoTitle);
         currTodo.appendChild(currInfoContainer);
 
-        console.log(todo.todo);
-        const note = document.createElement('div');
-        note.classList.add('curr-note-hidden');
-        note.innerHTML = todo.todo;
-        currTodo.appendChild(note);
+        currTodo.addEventListener('click', () => {
+            const noteDialog = getNoteDialog();
+            document.body.appendChild(noteDialog);
+            noteDialog.showModal();
+        })
 
         unsortedTodo.push([todo.priority, todo.dueDate, currTodo]);
     }

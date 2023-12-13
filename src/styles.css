@@ -41,18 +41,16 @@
 }
 
 .container {
-    /* height: 95vh; */
-    /* width: 100vw; */
     display: flex;
 }
 
-#category-dialog, #todo-dialog {
+#category-dialog, #todo-dialog, #note-dialog {
     margin: auto;
 
     border-radius: .6rem;
 }
 
-#category-form, #todo-form {
+#category-form, #todo-form, #note-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -146,21 +144,6 @@ img[class^="delete-category"] {
 .todo-note {
     height: 30vh;
     width: 40vw;
-}
-
-.curr-note-hidden {
-    display: none;
-    position: absolute;
-
-    height: 20vh;
-    width: 10vw;
-
-    border: 2px solid green;
-    background-color: #333;
-}
-
-.each-todo:hover .curr-note-hidden {
-    display: block;
 }
 
 .add-button {
